@@ -77,18 +77,17 @@ public class Main implements StreamRequestHandler {
     public String getVmess (String ip) {
         JSONObject v2rayJSON = new JSONObject();
         v2rayJSON.put("v", "2");
-        v2rayJSON.put("ps", "aws-ktcp");
+        v2rayJSON.put("ps", "aws-tcp");
         v2rayJSON.put("add", ip);
         // v2rayJSON.put("add", "3.0.182.85");
         v2rayJSON.put("port", "3306");
         v2rayJSON.put("id", "5d4893a0-18d5-11eb-a501-029405bb920e");
-        v2rayJSON.put("aid", "2");
-        v2rayJSON.put("net", "kcp");
+        v2rayJSON.put("aid", "0");
+        v2rayJSON.put("net", "tcp");
         v2rayJSON.put("type", "none");
         v2rayJSON.put("host", "");
         v2rayJSON.put("path", "");
         v2rayJSON.put("tls", "");
-        v2rayJSON.put("sni", "");
         return Base64.getEncoder().encodeToString(v2rayJSON.toJSONString().getBytes());
     }
 }

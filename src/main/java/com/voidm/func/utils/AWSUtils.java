@@ -19,7 +19,7 @@ public class AWSUtils {
     /**
      * 实例名称
      */
-    public static final String INSTANCE_NAME = "CentOS-1-Multi-V2ray";
+    public static final String INSTANCE_NAME = "CentOS-1-V2ray";
     public static final int INSTANCE_PORT = 3306;
 
     public static DNSService dnsService = new AliyunDNSServiceImpl();
