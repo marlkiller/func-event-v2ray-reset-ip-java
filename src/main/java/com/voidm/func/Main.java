@@ -40,7 +40,7 @@ public class Main implements StreamRequestHandler {
                     .readTimeout(60, TimeUnit.MINUTES)
                     .writeTimeout(60, TimeUnit.MINUTES)
                     .build();
-            String url = ginV2rayHost + "/vmess_ping?vmess=" + getVmess(instance.publicIpAddress());
+            String url = ginV2rayHost + "?vmess=" + getVmess(instance.publicIpAddress());
             Request pingRequest = new Request.Builder()
                     .url(url)
                     .method("GET", null)
