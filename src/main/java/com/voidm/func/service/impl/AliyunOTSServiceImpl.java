@@ -1,11 +1,19 @@
 package com.voidm.func.service.impl;
 
 import com.alicloud.openservices.tablestore.SyncClient;
-import com.alicloud.openservices.tablestore.model.*;
-
+import com.alicloud.openservices.tablestore.model.ColumnValue;
+import com.alicloud.openservices.tablestore.model.DeleteRowRequest;
+import com.alicloud.openservices.tablestore.model.PrimaryKey;
+import com.alicloud.openservices.tablestore.model.PrimaryKeyBuilder;
+import com.alicloud.openservices.tablestore.model.PrimaryKeyValue;
+import com.alicloud.openservices.tablestore.model.PutRowRequest;
+import com.alicloud.openservices.tablestore.model.RangeIteratorParameter;
+import com.alicloud.openservices.tablestore.model.Row;
+import com.alicloud.openservices.tablestore.model.RowDeleteChange;
+import com.alicloud.openservices.tablestore.model.RowPutChange;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
 
 /**
  * @author voidm
@@ -52,6 +60,33 @@ public class AliyunOTSServiceImpl {
     }
 
     public static void main (String[] args) {
-        System.out.println(LocalDateTime.now().atZone(ZoneId.of("Asia/Shanghai")).format(FORMATTER));
+        getRangeByIterator(client,"2021-12-13 10:23:32","2023-12-13 10:23:32");
+    }
+
+    private static void getRangeByIterator(SyncClient client, String startPkValue, String endPkValue) {
+        RangeIteratorParameter rangeIteratorParameter = new RangeIteratorParameter(TABLE_NAME);
+
+        //设置起始主键。
+        PrimaryKeyBuilder primaryKeyBuilder = PrimaryKeyBuilder.createPrimaryKeyBuilder();
+        primaryKeyBuilder.addPrimaryKeyColumn("id", PrimaryKeyValue.fromString(startPkValue));
+        rangeIteratorParameter.setInclusiveStartPrimaryKey(primaryKeyBuilder.build());
+
+        //设置结束主键。
+        primaryKeyBuilder = PrimaryKeyBuilder.createPrimaryKeyBuilder();
+        primaryKeyBuilder.addPrimaryKeyColumn("id", PrimaryKeyValue.fromString(endPkValue));
+        rangeIteratorParameter.setExclusiveEndPrimaryKey(primaryKeyBuilder.build());
+
+        rangeIteratorParameter.setMaxVersions(1);
+
+        Iterator<Row> iterator = client.createRangeIterator(rangeIteratorParameter);
+
+        System.out.println("使用Iterator进行GetRange的结果为：");
+        while (iterator.hasNext()) {
+            Row row = iterator.next();
+            System.out.println(row);
+            DeleteRowRequest deleteRowRequest = new DeleteRowRequest();
+            deleteRowRequest.setRowChange(new RowDeleteChange(TABLE_NAME,row.getPrimaryKey()));
+            client.deleteRow(deleteRowRequest);
+        }
     }
 }
