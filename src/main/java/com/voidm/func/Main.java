@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 public class Main implements StreamRequestHandler {
 
     public static void main(String[] args) {
-        System.out.println(AWSUtils.getInstance());
+        AWSUtils.checkDNSValue(AWSUtils.getInstance().publicIpAddress());
     }
 
     // public String ginV2rayHost = "http://48454388-1356827337907157.test.functioncompute.com";
