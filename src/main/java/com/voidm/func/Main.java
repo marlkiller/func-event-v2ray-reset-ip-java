@@ -81,7 +81,7 @@ public class Main implements StreamRequestHandler {
         v2rayJSON.put("add", ip);
         // v2rayJSON.put("add", "3.0.182.85");
         v2rayJSON.put("port", "3306");
-        v2rayJSON.put("id", "5d4893a0-18d5-11eb-a501-029405bb920e");
+        v2rayJSON.put("id", System.getenv("uuid"));
         v2rayJSON.put("aid", "0");
         v2rayJSON.put("net", "tcp");
         v2rayJSON.put("type", "none");
