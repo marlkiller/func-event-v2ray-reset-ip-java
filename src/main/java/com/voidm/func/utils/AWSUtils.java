@@ -1,13 +1,17 @@
 package com.voidm.func.utils;
 
 import com.voidm.func.service.DNSService;
-import com.voidm.func.service.impl.AliyunDNSServiceImpl;
+import com.voidm.func.service.impl.CloudFlareDNSServiceImpl;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.AwsCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.lightsail.LightsailClient;
-import software.amazon.awssdk.services.lightsail.model.*;
+import software.amazon.awssdk.services.lightsail.model.GetInstanceRequest;
+import software.amazon.awssdk.services.lightsail.model.GetInstanceResponse;
+import software.amazon.awssdk.services.lightsail.model.Instance;
+import software.amazon.awssdk.services.lightsail.model.StartInstanceRequest;
+import software.amazon.awssdk.services.lightsail.model.StopInstanceRequest;
 
 public class AWSUtils {
     /**
@@ -22,7 +26,7 @@ public class AWSUtils {
     public static final String INSTANCE_NAME = "CentOS-1-V2ray";
     public static final int INSTANCE_PORT = 3306;
 
-    public static DNSService dnsService = new AliyunDNSServiceImpl();
+    public static DNSService dnsService = new CloudFlareDNSServiceImpl();
 
     private static final LightsailClient lightsailClient;
 

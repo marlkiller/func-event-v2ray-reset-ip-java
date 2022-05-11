@@ -27,8 +27,8 @@ public class Main implements StreamRequestHandler {
         AWSUtils.checkDNSValue(AWSUtils.getInstance().publicIpAddress());
     }
 
-    // public String ginV2rayHost = "http://48454388-1356827337907157.test.functioncompute.com";
-    public String ginV2rayHost = "http://go.fc.voidm.com";
+    public String ginV2rayHost = "https://1356827337907157.cn-beijing.fc.aliyuncs.com/2016-08-15/proxy/fun_service_bj.LATEST/go_dev/";
+    // public String ginV2rayHost = "http://go.fc.voidm.com";
 
     @Override
     public void handleRequest (InputStream inputStream, OutputStream outputStream, Context context) throws IOException {

@@ -61,8 +61,6 @@ public class CloudFlareDNSServiceImpl implements DNSService {
             String x = "refreshCloudFlareDNS.....";
             System.out.println(x);
             GlobalBody.add(x);
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
